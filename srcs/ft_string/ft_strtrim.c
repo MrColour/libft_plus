@@ -6,11 +6,11 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 15:49:01 by kmira             #+#    #+#             */
-/*   Updated: 2019/02/15 23:15:54 by kmira            ###   ########.fr       */
+/*   Updated: 2019/02/28 21:30:05 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_string.h"
 
 static int	is_whitespacep(int c)
 {
