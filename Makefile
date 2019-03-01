@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:23:01 by akharrou          #+#    #+#              #
-#    Updated: 2019/02/28 16:29:11 by kmira            ###   ########.fr        #
+#    Updated: 2019/03/01 01:03:34 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,24 +108,31 @@ FILES += $(addprefix $(SRC_DIR)/ft_string/, $(STRING))
 
 SRCS = $(addsuffix .c, $(FILES))
 
-OBJS =	$(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(CTYPE)))
-OBJS +=	$(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(STDIO)))
-OBJS +=	$(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(STDLIB)))
-OBJS +=	$(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(STRING)))
+OBJS =	$(addsuffix .o, $(CTYPE))
+OBJS +=	$(addsuffix .o, $(STDIO))
+OBJS +=	$(addsuffix .o, $(STDLIB))
+OBJS +=	$(addsuffix .o, $(STRING))
 
 all: build
 	@make $(NAME)
 
-$(NAME): $(OBJS)
-	@ar -rcs $(NAME) $(OBJS)
+$(NAME): move
+	@ar -rcs $(NAME) $(addprefix $(OBJ_DIR)/, $(OBJS))
 	@echo "\033[1;32m""\t\t\t\t\t\t\t[Done!]"
 
 build:
 	@mkdir $(OBJ_DIR)
 	@echo "\033[1;36m""\tMaking the objects for your program..."
 
+move: $(OBJS)
+	@for f in $(OBJS) ; do \
+		mv $$f $(OBJ_DIR)/$$f; \
+	done
+
 $(OBJS): $(SRCS)
-	@$(CC) $(CFLAGS) -c $< -o $@ -I.$(INC_DIR)
+	@$(CC) $(CFLAGS) -c $(SRCS) -I.$(INC_DIR)
+
+
 
 DEL = /bin/rm -rf
 
